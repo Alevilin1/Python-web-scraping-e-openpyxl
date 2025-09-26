@@ -1,6 +1,7 @@
 import openpyxl
 import sys
 import fonte
+from rich.progress import track
 import time
 import openpyxl.workbook
 import requests
@@ -37,7 +38,7 @@ except Exception as e:
 
 
 try:
-    for i in range(1,51): 
+    for i in track(range(1,51), description="Processando..."): 
         response = requests.get(f'https://books.toscrape.com/catalogue/page-{i}.html', headers)
 
         soup = BeautifulSoup(response.content, 'html.parser')
@@ -102,4 +103,4 @@ fim = time.time()
 
 duracao = fim - inicio
 
-print(f"Execução finalizada em {duracao:2f} Segundos")
+print(f"Execução finalizada")
